@@ -18,7 +18,3 @@ mutation MaybeAddNewCategory($cat: String!) {
   "cat": "JEDI" 
 }
 
-https://blog.jeremylikness.com/blog/graphql-for-dotnet-developers/
-* GraphQL.NET
-* HotChocolate
-* GraphQL.EntityFramework
