@@ -1,0 +1,67 @@
+schema {
+	query: Query
+	mutation: Mutation
+}
+
+scalar Boolean
+scalar Char
+scalar Date
+scalar Float
+scalar ID
+scalar Int
+scalar String
+
+directive @include(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+enum CategoryImportanceEnum {
+	Important
+	Regular
+}
+
+"""category importance"""
+enum importance {
+	Important
+	Regular
+}
+
+type Query {
+	categories: [Category!]!
+	"""Return a Category by its Id"""
+	category(id: Int!): Category
+	"""Return a Expense by its Id"""
+	expense(id: Int!): Expense
+	expenses: [Expense!]!
+	"""Fetch important categories"""
+	importantCategories: Category
+}
+
+type Category {
+	"""Return a Expense by its Id"""
+	expense(id: Int!): Expense
+	expenses: [Expense!]!
+	id: Int!
+	importance: CategoryImportanceEnum!
+	name: String!
+}
+
+type Expense {
+	amount: Float!
+	category: Category!
+	categoryId: Int
+	id: Int!
+	month: Int!
+	name: String!
+	year: Int!
+}
+
+"""Information about subscriptions"""
+type SubscriptionType {
+	name: String!
+}
+
+type Mutation {
+	"""Add a new category to the system"""
+	addCategory(name: String!): Category!
+}
+
